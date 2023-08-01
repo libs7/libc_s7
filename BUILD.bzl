@@ -19,10 +19,10 @@ UTHASH_VERSION = "2.3.0"
 BASE_SRCS = []
 BASE_DEPS = [
     "@libs7//src:s7", # "@libs7//config:hdrs",
-    "@liblog_cc//src:logc"
+    # "@liblog_cc//src:logc"
 ]
 BASE_INCLUDE_PATHS = [
     "-Iexternal/libs7~{}/src".format(LIBS7_VERSION),
-    "-Iexternal/liblog_cc~{}/src".format(LIBLOG_CC_VERSION),
+    # "-Iexternal/liblog_cc~{}/src".format(LIBLOG_CC_VERSION),
 ]
 TIMEOUT = "short"
