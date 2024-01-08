@@ -17,37 +17,37 @@ DEPS          = [] # BASE_DEPS
 INCLUDE_PATHS = [] # BASE_INCLUDE_PATHS
 COPTS = [
     "-Wno-unused-parameter",
-    "-I$(@)/src"
+    # "-I$(@)/src"
 ]
 
 DEFINES       = [] #BASE_DEFINES
 LINKOPTS      = [] #BASE_LINKOPTS
 
-TOOLCHAINS = ["//:repo_paths"]
+# TOOLCHAINS = ["//:repo_paths"]
 
 ################################################################
 s7_plugin(
     name  = "c_s7",
     # linkstatic = True,
     # alwayslink = True, # ensure init fn sym available for dlsym
-    srcs  = ["//src/clibgen:libc_s7.c"],
-    deps  = DEPS,
+    srcs  = ["//lib/clibgen:libc_s7.c"],
+    # deps  = DEPS,
     copts = COPTS,
     linkopts = LINKOPTS  + select({
         "@platforms//os:linux": ["-lrt"],
         "//conditions:default": []
     }),
     local_defines = DEFINES,
-    toolchains = TOOLCHAINS
+    # toolchains = TOOLCHAINS
 )
 
-cc_shared_library(
-    name  = "c_s7_dso",  # create libc_s7.{dylib,so}
-    shared_lib_name = select({
-        "@platforms//os:macos": "libc_s7.dylib",
-        "@platforms//os:linux": "libc_s7.so",
-        # "@platforms//os:windows": "libc_s7.dll",
-        "//conditions:default": "libc_s7.so"
-    }),
-    deps = [":c_s7"]
-)
+# cc_shared_library(
+#     name  = "c_s7_dso",  # create libc_s7.{dylib,so}
+#     shared_lib_name = select({
+#         "@platforms//os:macos": "libc_s7.dylib",
+#         "@platforms//os:linux": "libc_s7.so",
+#         # "@platforms//os:windows": "libc_s7.dll",
+#         "//conditions:default": "libc_s7.so"
+#     }),
+#     deps = [":c_s7"]
+# )

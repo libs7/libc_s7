@@ -6,7 +6,7 @@
 #include <sys/types.h>
 
 #include "gopt.h"
-#include "log.h"
+#include "liblogc.h"
 #include "unity.h"
 #include "utarray.h"
 #include "utstring.h"
@@ -25,6 +25,8 @@ UT_string *sexp;
 s7_pointer actual;
 s7_pointer expected;
 
+int  s7plugin_verbosity;
+int  libs7_verbosity;
 bool verbose;
 bool debug;
 

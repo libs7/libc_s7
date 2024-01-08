@@ -8,5 +8,5 @@ clibgen(
     ],
     srcs = [":libc_clibgen.scm"],
     outs = [":libc_s7.c"],
-    visibility = ["//src:__pkg__"]
+    visibility = ["//lib:__pkg__"]
 )
