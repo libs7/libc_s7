@@ -1,44 +1,18 @@
 package(default_visibility = ["//visibility:public"])
 
-load("@rules_cc//cc:defs.bzl",
-     "cc_library",
-     # "cc_shared_library"
-     )
-
+load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@libs7//plugin:MACROS.bzl", "s7_plugin", "s7_library")
-
-# load("//:BUILD.bzl",
-#      "BASE_SRCS", "BASE_DEPS", "BASE_INCLUDE_PATHS",
-#      "BASE_COPTS", "BASE_DEFINES", "BASE_LINKOPTS",
-#      "TIMEOUT")
-
-SRCS          = []
-DEPS          = [] # BASE_DEPS
-INCLUDE_PATHS = [] # BASE_INCLUDE_PATHS
-COPTS = [
-    "-Wno-unused-parameter",
-    # "-I$(@)/src"
-]
-
-DEFINES       = [] #BASE_DEFINES
-LINKOPTS      = [] #BASE_LINKOPTS
-
-# TOOLCHAINS = ["//:repo_paths"]
 
 ################################################################
 s7_plugin(
     name  = "c_s7",
-    # linkstatic = True,
     # alwayslink = True, # ensure init fn sym available for dlsym
     srcs  = ["//lib/clibgen:libc_s7.c"],
-    # deps  = DEPS,
-    copts = COPTS,
-    linkopts = LINKOPTS  + select({
+    copts = ["-Wno-unused-parameter"],
+    linkopts = select({
         "@platforms//os:linux": ["-lrt"],
         "//conditions:default": []
     }),
-    local_defines = DEFINES,
-    # toolchains = TOOLCHAINS
 )
 
 # cc_shared_library(

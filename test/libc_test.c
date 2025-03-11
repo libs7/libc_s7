@@ -119,6 +119,22 @@ void test_math(void) {
     TEST_ASSERT_TRUE(s7_is_equal(s7, actual, expected));
 }
 
+void test_glob(void) {
+    sexp_input = ""
+        "(let* ((g (libc:glob.make))) "
+        "   (libc:glob \"*.*\" 0 g) "
+        "   (let ((res (libc:glob.gl-pathv g))) "
+        "      (libc:globfree g)"
+        "      res))"
+        ;
+    sexp_expected = "0";
+    utstring_renew(sexp);
+    utstring_printf(sexp, "%s", sexp_input);
+    actual = s7_eval_c_string(s7, utstring_body(sexp));
+    expected = s7_eval_c_string(s7, sexp_expected);
+    TEST_ASSERT_TRUE(s7_is_equal(s7, actual, expected));
+}
+
 void test_regex(void) {
     sexp_input = ""
         "(let* ((rg (libc:regex.make)) "
@@ -345,6 +361,7 @@ int main(int argc, char **argv)
     RUN_TEST(test_wordexp);
     /* RUN_TEST(test_gdbm); */
     RUN_TEST(test_math);
+    /* RUN_TEST(test_glob); */
     RUN_TEST(test_regex);
     /* RUN_TEST(test_utf8proc); */
 
